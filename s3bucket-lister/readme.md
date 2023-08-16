@@ -1,18 +1,21 @@
 # An Example Containerized Application Built with AWS Java SDK 
 
 
-## Building Java Projects with Maven
-https://spring.io/guides/gs/maven/#scratch
+## Prerequisites
 
-## Spring Boot Docker
-https://spring.io/guides/topicals/spring-boot-docker/
+- [Building Java Projects with Maven](https://spring.io/guides/gs/maven/#scratch)
+
+- [Spring Boot Docker](https://spring.io/guides/topicals/spring-boot-docker/)
 
 
 ## Set up the project
 
-**Skip the basics**
+**Skip the basics and Clone the repo**
+
 ```
-Clone the repo
+git clone https://github.com/berry2012/aws-java-sdk-samples.git
+
+cd aws-java-sdk-samples/s3bucket-lister
 ```
 
 
@@ -81,3 +84,18 @@ Done!!!
 - Configuring a Kubernetes service account to assume an IAM role.
 - [Configuring Pods to use a Kubernetes service account](https://docs.aws.amazon.com/eks/latest/userguide/pod-configuration.html)
 - Refer to sample [pod.yml](./pod.yml)
+- 
+```
+% kubectl logs -f s3bucket-lister -n serverless
+## RUNNING JAVA APP...
+The current local time is: 17:07:01.969
+Hello world!
+Your Amazon S3 buckets are:
+* my-bucket-1
+* my-bucket-2
+* my-bucket-3
+Going to sleep for a while...
+Sleep time in ms = 100000
+Done!!!
+
+```
