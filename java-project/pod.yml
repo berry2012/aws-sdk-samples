@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: s3bucket-lister
+  namespace: serverless  
+spec:
+  serviceAccountName: aws-sdk # configure IRSA - https://docs.aws.amazon.com/eks/latest/userguide/pod-configuration.html
+  containers:
+  - name: s3bucket-lister
+    image: berry2012/hellojava:v2
