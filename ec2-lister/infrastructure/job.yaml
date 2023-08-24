@@ -1,0 +1,39 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ec2lister
+  namespace: serverless 
+  labels:
+    app: ec2lister  
+spec:
+  completions: 10
+  parallelism: 3
+  completionMode: Indexed  # required for the feature
+  template:
+    spec:
+      securityContext: 
+        runAsNonRoot: true 
+        runAsUser: 1000 
+        seccompProfile:
+          type: RuntimeDefault    
+      automountServiceAccountToken: false    
+      serviceAccountName: aws-sdk # configure IRSA - https://docs.aws.amazon.com/eks/latest/userguide/pod-configuration.html   
+      containers:
+      - name: ec2lister
+        image: public.ecr.aws/q7r1z0m4/eks-aws-sdk-tutorial:ec2lister
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        securityContext:
+          allowPrivilegeEscalation: false     
+          readOnlyRootFilesystem: true    
+          capabilities:
+            drop:
+              - ALL    
+      restartPolicy: Never
+  backoffLimit: 4
