@@ -26,6 +26,7 @@
 package ec2lister;
 
 // snippet-start:[ec2.java1.running_instances.import]
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.ec2.AmazonEC2;
 import com.amazonaws.services.ec2.AmazonEC2ClientBuilder;
 import com.amazonaws.services.ec2.model.DescribeInstancesRequest;
@@ -55,9 +56,13 @@ public class FindRunningInstances {
   } 
   
     public static void main(String[] args) {
-
+        LocalTime currentTime = new LocalTime();
+        System.out.println("The current local time is: " + currentTime + "\n");
+        Greeter greeter = new Greeter();
+        System.out.println(greeter.sayHello());   
         // snippet-start:[ec2.java1.running_instances.main]
-        AmazonEC2 ec2 = AmazonEC2ClientBuilder.defaultClient();
+        // AmazonEC2 ec2 = AmazonEC2ClientBuilder.defaultClient();
+        AmazonEC2 ec2 = AmazonEC2ClientBuilder.standard().withRegion(Regions.DEFAULT_REGION).build();
 
         try {
             //Create the Filter to use to find running instances

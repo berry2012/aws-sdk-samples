@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: s3bucket-lister
+  name: s3bucketlister
   namespace: serverless  
 spec:
   securityContext: 
@@ -12,8 +12,8 @@ spec:
   automountServiceAccountToken: false
   serviceAccountName: aws-sdk # configure IRSA - https://docs.aws.amazon.com/eks/latest/userguide/pod-configuration.html
   containers:
-  - name: s3bucket-lister
-    image: public.ecr.aws/q7r1z0m4/eks-aws-sdk-tutorial:latest
+  - name: s3bucketlister
+    image: public.ecr.aws/q7r1z0m4/eks-aws-sdk-tutorial:s3lister
     imagePullPolicy: Always
     resources:
       requests:
