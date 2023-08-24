@@ -4,7 +4,27 @@ metadata:
   name: s3bucket-lister
   namespace: serverless  
 spec:
+  securityContext: 
+    runAsNonRoot: true 
+    runAsUser: 1000 
+    seccompProfile:
+      type: RuntimeDefault    
+  automountServiceAccountToken: false
   serviceAccountName: aws-sdk # configure IRSA - https://docs.aws.amazon.com/eks/latest/userguide/pod-configuration.html
   containers:
   - name: s3bucket-lister
-    image: berry2012/hellojava:v2
+    image: public.ecr.aws/q7r1z0m4/eks-aws-sdk-tutorial:latest
+    imagePullPolicy: Always
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    securityContext:
+      allowPrivilegeEscalation: false     
+      readOnlyRootFilesystem: true    
+      capabilities:
+        drop:
+          - ALL          
