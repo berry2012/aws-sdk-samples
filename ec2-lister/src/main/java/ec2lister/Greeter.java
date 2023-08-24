@@ -1,4 +1,4 @@
-package hello;
+package ec2lister;
 
 public class Greeter {
   public String sayHello() {
