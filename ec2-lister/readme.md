@@ -23,18 +23,15 @@ cd aws-java-sdk-samples/ec2-lister
 ## Build Java code or use the prebuilt package in target/aws-ec2-examples-1.0.jar
 
 ```
-java -jar target/aws-ec2-examples-1.0.jar
+java -jar target/aws-ec2-examples-1.0.0.jar
 ```
 
 
 ## Dockerize the app using sh entrypoint
 
 ```
-cd infrastructure 
 
-cp ../target/aws-ec2-examples-1.0.jar .
-
-docker build --build-arg JAR_FILE="aws-ec2-examples-1.0.jar" -t ec2lister:v2 .
+docker build --build-arg JAR_FILE="target/aws-ec2-examples-1.0.0.jar" -t ec2lister:v2 .
 
 docker run -p 8080:8080 --name myappv2 ec2lister:v2
 
@@ -73,8 +70,12 @@ Found reservation with id i-1234abcde1234abcde, AMI ami-0e8cb4bdc5bb2e6c0, type 
 - 
 
 ```
-% kubectl logs -f ec2-lister -n serverless
+% kubectl logs -f ec2lister -n sdk
+
 ## RUNNING JAVA APP...
+The current local time is: 17:16:50.944
+
+AWS EKS Using the AWS SDK for Java v1.0.0
 Found reservation with id i-1234abcde1234abcef, AMI ami-0069d66985b09d219, type t3.medium, state running and monitoring state disabled
 Found reservation with id i-1234abcde1234abcde, AMI ami-0e8cb4bdc5bb2e6c0, type t2.micro, state running and monitoring state disabled
 
