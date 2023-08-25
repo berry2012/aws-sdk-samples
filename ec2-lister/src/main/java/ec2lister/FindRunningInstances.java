@@ -61,8 +61,9 @@ public class FindRunningInstances {
         Greeter greeter = new Greeter();
         System.out.println(greeter.sayHello());   
         // snippet-start:[ec2.java1.running_instances.main]
-        // AmazonEC2 ec2 = AmazonEC2ClientBuilder.defaultClient();
-        AmazonEC2 ec2 = AmazonEC2ClientBuilder.standard().withRegion(Regions.DEFAULT_REGION).build();
+        AmazonEC2 ec2 = AmazonEC2ClientBuilder.defaultClient();
+        // https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/java-dg-region-selection.html
+        // AmazonEC2 ec2 = AmazonEC2ClientBuilder.standard().withRegion(Regions.US_EAST_1).build();
 
         try {
             //Create the Filter to use to find running instances

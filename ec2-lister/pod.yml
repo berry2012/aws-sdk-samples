@@ -12,8 +12,8 @@ spec:
   automountServiceAccountToken: false
   serviceAccountName: aws-sdk # configure IRSA - https://docs.aws.amazon.com/eks/latest/userguide/pod-configuration.html
   containers:
-  - name: ec3lister
-    image: public.ecr.aws/q7r1z0m4/eks-aws-sdk-tutorial:ec2lister
+  - name: ec2lister
+    image: public.ecr.aws/q7r1z0m4/eks-aws-sdk-tutorial:ec2lister1.0.0
     imagePullPolicy: Always
     resources:
       requests:
