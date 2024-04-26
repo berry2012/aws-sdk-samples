@@ -1,0 +1,15 @@
+{
+    "name": "nodejs_sdk_s3_api_sample",
+    "version": "1.0.0",
+    "description": "Get S3 Object",
+    "author": "Olawale Olaleye <ola.wale@example.com>",
+    "main": "index.js",
+    "scripts": {
+      "start": "node index.js"
+    },    
+    "dependencies": {
+        "aws-sdk": "2.1578.0",
+        "dotenv": "^16.4.5",
+        "@aws-sdk/credential-providers": "^3.540.0"
+      }
+  }

@@ -1,0 +1,14 @@
+  {
+    "name": "nodejs_sdk_v3_samples",
+    "version": "1.0.0",
+    "description": "Sample Apps",
+    "author": "Olawale Olaleye <ola.wale@example.com>",
+    "type": "module",
+    "dependencies": {
+      "dotenv": "^16.4.5",
+      "@aws-sdk/client-s3": "^3.272.0",
+      "@aws-sdk/client-sqs": "^3.540.0",
+      "@aws-sdk/credential-providers": "^3.276.0",
+      "@smithy/url-parser": "^2.0.2"
+    }
+  }  
