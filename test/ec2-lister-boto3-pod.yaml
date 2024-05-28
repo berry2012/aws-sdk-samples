@@ -14,7 +14,7 @@ spec:
     image: berry2012/boto3:1.9.220   # replace this image with your own image
     imagePullPolicy: Always
     command: ["python"]
-    args: ["-c", "import boto3; import time; ec2 = boto3.client('ec2', region_name='eu-west-1'); print('Going to sleep for a while before returning output\n'); print([instance['InstanceId'] for instance in ec2.describe_instances()['Reservations'][0]['Instances']]); time.sleep(60)"]
+    args: ["-c", "import boto3; import time; ec2 = boto3.client('ec2', region_name='eu-west-1'); print('Going to sleep for a while before returning output'); print([instance['InstanceId'] for instance in ec2.describe_instances()['Reservations'][0]['Instances']]); time.sleep(60)"]
     resources:
       requests:
         memory: "64Mi"
