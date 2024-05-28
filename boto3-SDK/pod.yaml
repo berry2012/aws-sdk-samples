@@ -1,0 +1,27 @@
+# When this annotation is present, the AWS SDK for Python (Boto3) will automatically use the IAM role's temporary security credentials to authenticate API requests.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ec2-lister
+  namespace: serverless  
+spec:
+  securityContext: # https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+    runAsNonRoot: false # to specify a user, we'll have to add a user in the dockerfile for the image below
+  automountServiceAccountToken: false
+  serviceAccountName: aws-sdk
+  containers:
+  - name: ec2-lister
+    image: berry2012/boto3:1.9.220   # replace this image with your own image
+    imagePullPolicy: Always
+    command: ["python"]
+    args: ["-c", "import boto3; ec2 = boto3.client('ec2', region_name='eu-west-1'); print([instance['InstanceId'] for instance in ec2.describe_instances()['Reservations'][0]['Instances']])"]
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    securityContext:
+      allowPrivilegeEscalation: false       
+      readOnlyRootFilesystem: true       
