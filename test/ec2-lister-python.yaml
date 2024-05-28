@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ec2-lister-python
+  name: ec2-lister-python
+  namespace: serverless
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ec2-lister-python
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: ec2-lister-python
+    spec:
+      serviceAccountName: aws-sdk
+      containers:        
+      - name: ec2-lister-python
+        image: berry2012/boto3:1.9.220   # replace this image with your own image
+        imagePullPolicy: Always
+        command: ["python"]
+        args: ["-c", "import boto3; import time; ec2 = boto3.client('ec2', region_name='eu-west-1'); print([instance['InstanceId'] for instance in ec2.describe_instances()['Reservations'][0]['Instances']]); time.sleep(360)"]
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+

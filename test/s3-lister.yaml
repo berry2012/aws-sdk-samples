@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: s3bucketlister
+  name: s3bucketlister-java
+  namespace: serverless
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: s3bucketlister
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: s3bucketlister
+    spec:
+      serviceAccountName: aws-sdk
+      containers:
+      - name: s3bucketlister
+        image: public.ecr.aws/q7r1z0m4/eks-aws-sdk-tutorial:s3lister        
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"        
+
+

@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ec2lister
+  name: ec2lister-java
+  namespace: serverless
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ec2lister
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: ec2lister
+    spec:
+      serviceAccountName: aws-sdk
+      containers:
+      - image: public.ecr.aws/q7r1z0m4/eks-aws-sdk-tutorial:ec2lister1.0.0
+        name: flask-app
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"        
+
+
